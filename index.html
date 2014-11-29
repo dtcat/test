@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>出差申请报告生成器</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>出差申请报告生成器</h1>
+            <p>快速生成标准格式的出差申请和出差报告邮件</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="application">出差申请</button>
+            <button class="tab-btn" data-tab="report">出差报告</button>
+        </div>
+
+        <div class="form-container">
+            <form id="application-form" class="form active">
+                <h2>出差申请</h2>
+                <div class="form-section">
+                    <h3>基本信息</h3>
+                    <div class="form-group">
+                        <label for="app-name">姓名 *</label>
+                        <input type="text" id="app-name" name="name" required placeholder="请输入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-department">部门 *</label>
+                        <input type="text" id="app-department" name="department" required placeholder="请输入部门">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-position">职位 *</label>
+                        <input type="text" id="app-position" name="position" required placeholder="请输入职位">
+                    </div>
+
+                </div>
+
+                <div class="form-section">
+                    <h3>出差时间地点</h3>
+                    <div class="form-group">
+                        <label for="app-start-date">出发日期 *</label>
+                        <input type="date" id="app-start-date" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-end-date">返回日期 *</label>
+                        <input type="date" id="app-end-date" name="endDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="app-location">出差地点 *</label>
+                        <input type="text" id="app-location" name="location" required placeholder="请输入出差地点">
+                    </div>
+                    <div class="form-group">
+                        <label for="app-transport">交通方式 *</label>
+                        <select id="app-transport" name="transport" required>
+                            <option value="">请选择交通方式</option>
+                            <option value="飞机">飞机</option>
+                            <option value="火车">火车</option>
+                            <option value="汽车">汽车</option>
+                            <option value="其他">其他</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>出差目的（按半天自动生成）</h3>
+                    <div id="app-schedule-container" style="background: #f0f8ff; min-height: 20px; padding: 10px; border: 1px dashed #ccc;">
+                        <p style="color: #999; font-size: 12px;">填写出发和返回日期后，系统将自动生成半天行程</p>
+                    </div>
+                </div>
+            </form>
+
+            <form id="report-form" class="form">
+                <h2>出差报告</h2>
+                <div class="form-section">
+                    <h3>基本信息</h3>
+                    <div class="form-group">
+                        <label for="rep-name">姓名 *</label>
+                        <input type="text" id="rep-name" name="name" required placeholder="请输入姓名">
+                    </div>
+                    <div class="form-group">
+                        <label for="rep-department">部门 *</label>
+                        <input type="text" id="rep-department" name="department" required placeholder="请输入部门">
+                    </div>
+                    <div class="form-group">
+                        <label for="rep-position">职位 *</label>
+                        <input type="text" id="rep-position" name="position" required placeholder="请输入职位">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>出差信息</h3>
+                    <div class="form-group">
+                        <label for="rep-start-date">出发日期 *</label>
+                        <input type="date" id="rep-start-date" name="startDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rep-end-date">返回日期 *</label>
+                        <input type="date" id="rep-end-date" name="endDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="rep-location">出差地点 *</label>
+                        <input type="text" id="rep-location" name="location" required placeholder="请输入出差地点">
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>出差行程回顾（按半天自动生成）</h3>
+                    <div id="rep-schedule-container" style="background: #fff0f5; min-height: 20px; padding: 10px; border: 1px dashed #ccc;">
+                        <p style="color: #999; font-size: 12px;">填写出发和返回日期后，系统将自动生成半天行程</p>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>出差总结</h3>
+                    <div class="form-group">
+                        <label for="rep-summary">出差总结 *</label>
+                        <textarea id="rep-summary" name="summary" rows="6" required placeholder="请描述工作成果、遇到的问题及建议"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="actions">
+            <button type="button" class="btn btn-primary" id="generate-btn">生成预览</button>
+            <button type="button" class="btn btn-secondary" id="clear-btn">清空表单</button>
+            <button type="button" class="btn btn-success" id="copy-btn" disabled>复制到剪贴板</button>
+        </div>
+
+        <div class="preview-container" id="preview-container">
+            <h3>邮件预览</h3>
+            <div class="preview-content" id="preview-content">
+                <p class="placeholder">点击"生成预览"按钮查看生成的邮件内容</p>
+            </div>
+        </div>
+
+        <div class="toast" id="toast"></div>
+    </div>
+
+    <script src="js/template.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

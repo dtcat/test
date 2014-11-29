@@ -1,0 +1,522 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+header p {
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+.tabs {
+    display: flex;
+    background: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    background: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #6c757d;
+    position: relative;
+}
+
+.tab-btn:hover {
+    background: #e9ecef;
+    color: #495057;
+}
+
+.tab-btn.active {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.form-container {
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.form {
+    display: none;
+}
+
+.form.active {
+    display: block;
+}
+
+.form h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 24px;
+    border-bottom: 2px solid #667eea;
+    padding-bottom: 10px;
+}
+
+.form-section {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.form-section h3 {
+    color: #555;
+    font-size: 18px;
+    margin-bottom: 15px;
+    padding-left: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-group label::after {
+    content: ' *';
+    color: #dc3545;
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="date"],
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group select {
+    cursor: pointer;
+    background: white;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+    padding: 20px 30px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.btn {
+    flex: 1;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: #28a745;
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.schedule-item {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.schedule-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.schedule-title {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+.btn-remove {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+    background: #c82333;
+}
+
+.schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 15px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .schedule-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+
+.preview-container {
+    padding: 30px;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+}
+
+.preview-container h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.preview-content {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 6px;
+    padding: 20px;
+    min-height: 200px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.preview-content .placeholder {
+    color: #6c757d;
+    text-align: center;
+    padding: 40px 20px;
+    font-style: italic;
+}
+
+.preview-content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.preview-content th {
+    background: #667eea;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.preview-content td {
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    color: #333;
+    vertical-align: top;
+}
+
+.preview-content tr:nth-child(even) {
+    background: #f8f9fa;
+}
+
+.preview-content h2 {
+    color: #333;
+    text-align: center;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    font-size: 24px;
+}
+
+.preview-content h3 {
+    color: #333;
+    margin: 30px 0 15px 0;
+    font-size: 18px;
+}
+
+.preview-content .subject {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #667eea;
+}
+
+.toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 6px;
+    color: white;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    max-width: 300px;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.toast.success {
+    background: #28a745;
+}
+
+.toast.error {
+    background: #dc3545;
+}
+
+.toast.info {
+    background: #17a2b8;
+}
+
+.btn-add {
+    background: #17a2b8;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.btn-add:hover {
+    background: #138496;
+    transform: translateY(-2px);
+}
+
+.btn-add .icon {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.schedule-item {
+    background: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.schedule-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.schedule-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.schedule-title {
+    font-weight: 600;
+    color: #333;
+    font-size: 16px;
+}
+
+.btn-remove {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.btn-remove:hover {
+    background: #c82333;
+}
+
+.schedule-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 15px;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .schedule-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+}
+    body {
+        padding: 10px;
+    }
+
+    header {
+        padding: 20px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    .form-container,
+    .preview-container {
+        padding: 20px;
+    }
+
+    .actions {
+        flex-direction: column;
+        padding: 15px 20px;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .tab-btn {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .form h2 {
+        font-size: 20px;
+    }
+
+    .form-section h3 {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 20px;
+    }
+
+    header p {
+        font-size: 12px;
+    }
+
+    .form-container,
+    .preview-container {
+        padding: 15px;
+    }
+
+    .preview-content {
+        padding: 15px;
+    }
+
+    .toast {
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
