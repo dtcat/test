@@ -1,54 +1,31 @@
 function generateApplicationEmail(formData) {
     const subject = `出差申请 - ${formData.name} - ${formData.startDate}`;
     
-    // 生成行程表格
+    // 生成行程表格（包含所有列）
     let scheduleTable = '';
     if (formData.scheduleItems && formData.scheduleItems.length > 0) {
         scheduleTable = `
-            <table>
-                <tr>
-                    <th>日期</th>
-                    <th>时间段</th>
-                    <th>出差类型</th>
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                <tr style="background: #667eea; color: white;">
+                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">日期</th>
+                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">时间段</th>
+                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">出差类型</th>
+                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">具体动作描述</th>
                 </tr>
         `;
         
         formData.scheduleItems.forEach(item => {
             scheduleTable += `
                 <tr>
-                    <td>${item.date}</td>
-                    <td>${item.period}</td>
-                    <td>${item.type}</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">${item.date}</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">${item.period}</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">${item.type}</td>
+                    <td style="padding: 12px; border: 1px solid #dee2e6;">${item.description.replace(/\n/g, '<br>')}</td>
                 </tr>
             `;
         });
         
         scheduleTable += `</table>`;
-    }
-    
-    // 生成详细动作描述表格
-    let detailTable = '';
-    if (formData.scheduleItems && formData.scheduleItems.length > 0) {
-        detailTable = `
-            <table>
-                <tr>
-                    <th>日期</th>
-                    <th>时间段</th>
-                    <th>具体动作描述</th>
-                </tr>
-        `;
-        
-        formData.scheduleItems.forEach(item => {
-            detailTable += `
-                <tr>
-                    <td>${item.date}</td>
-                    <td>${item.period}</td>
-                    <td>${item.description.replace(/\n/g, '<br>')}</td>
-                </tr>
-            `;
-        });
-        
-        detailTable += `</table>`;
     }
     
     const emailContent = `
@@ -95,9 +72,6 @@ function generateApplicationEmail(formData) {
             
             <h3 style="color: #333; margin-bottom: 15px; font-size: 18px;">出差行程安排</h3>
             ${scheduleTable}
-            
-            <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px; font-size: 18px;">具体动作描述</h3>
-            ${detailTable}
         </div>
     `;
 
@@ -110,7 +84,7 @@ function generateApplicationEmail(formData) {
 function generateReportEmail(formData) {
     const subject = `出差报告 - ${formData.name} - ${formData.startDate}`;
     
-    // 生成行程表格
+    // 生成行程表格（包含所有列）
     let scheduleTable = '';
     if (formData.scheduleItems && formData.scheduleItems.length > 0) {
         scheduleTable = `
@@ -119,6 +93,7 @@ function generateReportEmail(formData) {
                     <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">日期</th>
                     <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">时间段</th>
                     <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">出差类型</th>
+                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">具体动作描述</th>
                 </tr>
         `;
         
@@ -128,36 +103,12 @@ function generateReportEmail(formData) {
                     <td style="padding: 12px; border: 1px solid #dee2e6;">${item.date}</td>
                     <td style="padding: 12px; border: 1px solid #dee2e6;">${item.period}</td>
                     <td style="padding: 12px; border: 1px solid #dee2e6;">${item.type}</td>
-                </tr>
-            `;
-        });
-        
-        scheduleTable += `</table>`;
-    }
-    
-    // 生成详细动作描述表格
-    let detailTable = '';
-    if (formData.scheduleItems && formData.scheduleItems.length > 0) {
-        detailTable = `
-            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
-                <tr style="background: #667eea; color: white;">
-                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">日期</th>
-                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">时间段</th>
-                    <th style="padding: 12px; border: 1px solid #dee2e6; text-align: left;">具体动作描述</th>
-                </tr>
-        `;
-        
-        formData.scheduleItems.forEach(item => {
-            detailTable += `
-                <tr>
-                    <td style="padding: 12px; border: 1px solid #dee2e6;">${item.date}</td>
-                    <td style="padding: 12px; border: 1px solid #dee2e6;">${item.period}</td>
                     <td style="padding: 12px; border: 1px solid #dee2e6;">${item.description.replace(/\n/g, '<br>')}</td>
                 </tr>
             `;
         });
         
-        detailTable += `</table>`;
+        scheduleTable += `</table>`;
     }
     
     const emailContent = `
@@ -200,9 +151,6 @@ function generateReportEmail(formData) {
             
             <h3 style="color: #333; margin-bottom: 15px; font-size: 18px;">出差行程回顾</h3>
             ${scheduleTable}
-            
-            <h3 style="color: #333; margin-top: 30px; margin-bottom: 15px; font-size: 18px;">具体动作描述</h3>
-            ${detailTable}
             
             <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
                 <tr style="background: #667eea; color: white;">
